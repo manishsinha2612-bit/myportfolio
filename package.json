@@ -1,0 +1,11 @@
+{
+  "name": "manish-portfolio",
+  "version": "1.0.0",
+  "description": "UI/UX Designer Portfolio - Manish Kumar Sinha",
+  "private": true,
+  "scripts": {
+    "dev": "python -m http.server 3000"
+  },
+  "author": "Manish Kumar Sinha",
+  "license": "MIT"
+}
