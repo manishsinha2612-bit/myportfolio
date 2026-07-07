@@ -104,15 +104,22 @@
     e.preventDefault();
     const form = this;
     const data = new FormData(form);
+    
+    // Add custom subject line
+    data.append('_subject', 'New Message from Your Portfolio - ' + data.get('name'));
+    
     fetch('https://formsubmit.co/ajax/manishsinha2612@gmail.com', {
       method: 'POST',
-      headers: { 'Accept': 'application/json' },
       body: data
     }).then(response => response.json())
     .then(json => {
-      form.style.display = 'none';
-      document.getElementById('formSuccess').classList.add('show');
-      form.reset();
+      if (json.success) {
+        form.style.display = 'none';
+        document.getElementById('formSuccess').classList.add('show');
+        form.reset();
+      } else {
+        alert('Error: ' + (json.message || 'Failed to send message'));
+      }
     }).catch(err => {
       alert('There was an error submitting the form. Please try again later.');
       console.error(err);
