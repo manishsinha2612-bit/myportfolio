@@ -78,48 +78,23 @@
 
   // Resume button downloads the CV directly
   document.getElementById('resumeBtn').addEventListener('click', () => {
-    window.location.href = './public/assets/UI_UX Design_Resume_Updated.pdf';
+    window.location.href = '../UI_UX Design_Resume_Updated.pdf';
   });
-
-  // Inkriti Case Study dropdown
-  const inkritiBtn = document.getElementById('inkriti-case-study-btn');
-  const inkritiDropdown = document.getElementById('inkriti-dropdown');
-  
-  if (inkritiBtn && inkritiDropdown) {
-    inkritiBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      inkritiDropdown.classList.toggle('show');
-    });
-    
-    // Close dropdown when clicking outside
-    document.addEventListener('click', (e) => {
-      if (!inkritiBtn.contains(e.target) && !inkritiDropdown.contains(e.target)) {
-        inkritiDropdown.classList.remove('show');
-      }
-    });
-  }
 
   // Contact form submit — POST to FormSubmit AJAX endpoint
   document.getElementById('contactForm').addEventListener('submit', function (e) {
     e.preventDefault();
     const form = this;
     const data = new FormData(form);
-    
-    // Add custom subject line
-    data.append('_subject', 'New Message from Your Portfolio - ' + data.get('name'));
-    
     fetch('https://formsubmit.co/ajax/manishsinha2612@gmail.com', {
       method: 'POST',
+      headers: { 'Accept': 'application/json' },
       body: data
     }).then(response => response.json())
     .then(json => {
-      if (json.success) {
-        form.style.display = 'none';
-        document.getElementById('formSuccess').classList.add('show');
-        form.reset();
-      } else {
-        alert('Error: ' + (json.message || 'Failed to send message'));
-      }
+      form.style.display = 'none';
+      document.getElementById('formSuccess').classList.add('show');
+      form.reset();
     }).catch(err => {
       alert('There was an error submitting the form. Please try again later.');
       console.error(err);
