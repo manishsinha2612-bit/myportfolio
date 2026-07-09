@@ -11,14 +11,51 @@
 <link rel="stylesheet" href="style.css">
 
 </head>
-<body>
+<body class="is-loading">
+
+<!-- ================= PRELOADER ================= -->
+<div id="preloader" role="status" aria-live="polite" aria-label="Loading portfolio">
+  <div class="bg-grid"></div>
+  <div class="bg-orb blue" style="width:420px;height:420px;top:-120px;left:-100px;"></div>
+  <div class="bg-orb violet" style="width:340px;height:340px;bottom:-120px;right:-100px;"></div>
+
+  <div class="preloader-inner">
+    <div class="mock-frame" id="mockFrame">
+      <div class="mock-chrome">
+        <span class="mock-dot d1"></span>
+        <span class="mock-dot d2"></span>
+        <span class="mock-dot d3"></span>
+        <span class="mock-url"></span>
+      </div>
+      <div class="mock-body">
+        <div class="mock-nav skeleton" id="mNav"></div>
+        <div class="mock-hero skeleton" id="mHero"></div>
+        <div class="mock-line line-1 skeleton" id="mLine1"></div>
+        <div class="mock-line line-2 skeleton" id="mLine2"></div>
+        <div class="mock-btn skeleton" id="mBtn"><span class="mock-btn-ripple" id="mRipple"></span></div>
+      </div>
+      <div class="mock-cursor" id="mockCursor" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M4 2.5 18 9l-6.2 1.8L9 17z" fill="currentColor" stroke="#fff" stroke-width="1" stroke-linejoin="round"/></svg>
+      </div>
+      <div class="mock-badge" id="mockBadge" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5 9-10"/></svg>
+      </div>
+    </div>
+
+    <p class="loader-name">Manish Kumar Sinha</p>
+
+    <div class="loader-text">
+      <span class="loader-word" id="loaderWord">Wireframing the layout</span><span class="loader-dots" aria-hidden="true"><span>.</span><span>.</span><span>.</span></span>
+    </div>
+  </div>
+</div>
 
 <div id="cursor-glow"></div>
 
 <!-- ================= NAVBAR ================= -->
 <div class="navbar-wrap">
   <nav class="navbar" id="navbar">
-    <a href="#home" class="logo">Portfolio<span>.</span></a>
+    <a href="#home" class="logo">Manish<span>.</span></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#home" class="nav-link active">Home</a></li>
       <li><a href="#skills" class="nav-link">Skills</a></li>
@@ -517,7 +554,7 @@ Through academic and personal projects, I've built a strong foundation in user r
         <form id="contactForm">
           <div class="form-row">
             <div class="field"><label for="name">Name</label><input type="text" id="name" name="name" required placeholder="Your name"></div>
-            <div class="field"><label for="email">Email</label><input type="email" id="email" name="email" required placeholder="you@email.com"></div>
+            <div class="field"><label for="email">Email</label><input type="email" id="email" name="email" required placeholder="manishsinha2612@gmail.com"></div>
           </div>
           <div class="field"><label for="phone">Phone</label><input type="tel" id="phone" name="phone" placeholder="+91 00000 00000"></div>
           <div class="field"><label for="message">Message</label><textarea id="message" name="message" required placeholder="Tell me about the opportunity or project..."></textarea></div>

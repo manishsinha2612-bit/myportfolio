@@ -30,6 +30,11 @@
     -webkit-font-smoothing:antialiased;
   }
 
+  body.is-loading{
+    overflow:hidden;
+    height:100vh;
+  }
+
   /* ---------- decorative background orbs ---------- */
   section{overflow:hidden;}
   .bg-orb{
@@ -284,8 +289,6 @@
   /* ================= SKILLS ================= */
   .skills-grid{
     display:grid;
-    justify-content: center;
-    align-items: center;
     grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
     gap:var(--grid-gap);
   }
@@ -423,6 +426,216 @@
   }
   .footer p{font-size:14px; color:var(--body);}
   .footer .heart{color:#F04438;}
+
+  /* ==============================================================
+     PRELOADER
+     A pen-tool / vector-anchor sequence in the same visual language
+     as the rest of the site: the cursor "draws" a monogram path,
+     anchor points snap in as it goes (like plotting nodes in Figma),
+     then the whole thing dissolves into the hero.
+     ============================================================== */
+  #preloader{
+    position:fixed; inset:0; z-index:10000;
+    display:flex; align-items:center; justify-content:center;
+    background:
+      radial-gradient(circle at 1.5px 1.5px, rgba(16,24,40,.05) 1.5px, transparent 0) 0 0/28px 28px,
+      var(--bg);
+    transition:opacity .6s cubic-bezier(.16,1,.3,1), filter .6s cubic-bezier(.16,1,.3,1);
+    cursor:pointer;
+  }
+  #preloader.loader-exit{
+    opacity:0;
+    filter:blur(6px);
+    pointer-events:none;
+  }
+  #preloader .bg-grid{opacity:.6;}
+
+  .preloader-inner{
+    position:relative; z-index:1;
+    display:flex; flex-direction:column; align-items:center;
+    text-align:center;
+    transform:translateY(0);
+    transition:transform .6s cubic-bezier(.16,1,.3,1), opacity .5s ease;
+  }
+  #preloader.loader-exit .preloader-inner{
+    transform:translateY(-18px);
+    opacity:0;
+  }
+
+  /* ---- mock browser frame that "designs itself" ---- */
+  .mock-frame{
+    position:relative;
+    width:270px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:16px;
+    box-shadow:var(--shadow-lg);
+    overflow:hidden;
+    margin-bottom:30px;
+    opacity:0;
+    transform:scale(.92) translateY(10px);
+    animation:frameIn .55s cubic-bezier(.16,1,.3,1) forwards;
+  }
+  @keyframes frameIn{
+    to{opacity:1; transform:scale(1) translateY(0);}
+  }
+  .mock-chrome{
+    display:flex; align-items:center; gap:6px;
+    height:28px; padding:0 12px;
+    background:#F2F4F7; border-bottom:1px solid var(--border);
+  }
+  .mock-dot{
+    width:7px; height:7px; border-radius:50%;
+    opacity:0; transform:scale(0);
+    animation:dotIn .3s ease forwards;
+  }
+  .mock-dot.d1{background:#F04438; animation-delay:.15s;}
+  .mock-dot.d2{background:#F79009; animation-delay:.27s;}
+  .mock-dot.d3{background:#12B76A; animation-delay:.39s;}
+  @keyframes dotIn{ to{opacity:1; transform:scale(1);} }
+  .mock-url{
+    height:10px; width:0%; max-width:120px; border-radius:6px;
+    background:#E3E7ED; margin-left:8px;
+    animation:urlGrow .5s ease forwards; animation-delay:.5s;
+  }
+  @keyframes urlGrow{ to{width:60%;} }
+
+  .mock-body{ display:flex; flex-direction:column; gap:10px; padding:16px; }
+
+  .skeleton{
+    background:linear-gradient(90deg, #EEF1F5 25%, #E4E8EE 37%, #EEF1F5 63%);
+    background-size:400% 100%;
+    animation:shimmer 1.3s ease-in-out infinite;
+  }
+  @keyframes shimmer{
+    0%{background-position:100% 0;}
+    100%{background-position:0 0;}
+  }
+
+  .mock-nav{ height:14px; width:42%; border-radius:6px; transition:background .4s ease; }
+  .mock-nav.filled{ animation:none; background:var(--heading); }
+
+  .mock-hero{ height:64px; width:100%; border-radius:10px; transition:background .5s ease; }
+  .mock-hero.filled{
+    animation:none;
+    background:linear-gradient(135deg, #5B6CFF 0%, #8C97FF 55%, #C7CDFF 100%);
+  }
+
+  .mock-line{ height:8px; border-radius:4px; transition:background .35s ease; }
+  .mock-line.line-1{ width:92%; }
+  .mock-line.line-2{ width:64%; }
+  .mock-line.filled{ animation:none; background:#CBD2DC; }
+
+  .mock-btn{
+    position:relative; overflow:hidden;
+    height:26px; width:88px; border-radius:8px; margin-top:2px;
+    transition:background .35s ease;
+  }
+  .mock-btn.filled{ animation:none; background:var(--primary); }
+  .mock-btn-ripple{
+    position:absolute; top:50%; left:28px; width:14px; height:14px;
+    margin:-7px 0 0 -7px; border-radius:50%; background:#fff;
+    opacity:0; transform:scale(0); pointer-events:none;
+  }
+  .mock-btn-ripple.go{ animation:btnRipple .6s ease-out forwards; }
+  @keyframes btnRipple{
+    0%{opacity:.55; transform:scale(0);}
+    100%{opacity:0; transform:scale(7);}
+  }
+
+  .mock-cursor{
+    position:absolute; top:36px; left:190px; width:20px; height:20px;
+    color:var(--primary);
+    transform:rotate(-6deg);
+    transition:top .32s cubic-bezier(.65,0,.35,1), left .32s cubic-bezier(.65,0,.35,1);
+    filter:drop-shadow(0 3px 8px rgba(91,108,255,.4));
+    opacity:0;
+    animation:cursorIn .3s ease forwards; animation-delay:.7s;
+  }
+  .mock-cursor svg{ width:100%; height:100%; display:block; }
+  @keyframes cursorIn{ to{opacity:1;} }
+  .mock-cursor.to-btn{ top:150px; left:52px; }
+  .mock-cursor.click{ animation:cursorClick .22s ease; }
+  @keyframes cursorClick{
+    0%{transform:rotate(-6deg) scale(1);}
+    50%{transform:rotate(-6deg) scale(.72);}
+    100%{transform:rotate(-6deg) scale(1);}
+  }
+
+  .mock-badge{
+    position:absolute; top:10px; right:10px; width:24px; height:24px;
+    border-radius:50%; background:#12B76A;
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; transform:scale(0);
+    box-shadow:0 4px 10px rgba(18,183,106,.4);
+  }
+  .mock-badge svg{ width:13px; height:13px; }
+  .mock-badge.show{ animation:badgePop .4s cubic-bezier(.34,1.56,.64,1) forwards; }
+  @keyframes badgePop{ to{opacity:1; transform:scale(1);} }
+
+  .loader-name{
+    font-family:'Satoshi', sans-serif;
+    font-weight:700;
+    font-size:15px;
+    letter-spacing:.04em;
+    color:var(--heading);
+    margin-bottom:8px;
+    opacity:0;
+    animation:fadeUp .5s ease forwards;
+    animation-delay:.15s;
+  }
+  @keyframes fadeUp{
+    from{opacity:0; transform:translateY(8px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  .loader-text{
+    font-size:14px; font-weight:600; color:var(--body);
+    min-height:20px; margin-bottom:22px;
+    display:flex; align-items:baseline; gap:2px;
+  }
+  .loader-word{transition:opacity .25s ease;}
+  .loader-dots span{
+    display:inline-block;
+    animation:dotBounce 1.2s ease-in-out infinite;
+  }
+  .loader-dots span:nth-child(2){animation-delay:.15s;}
+  .loader-dots span:nth-child(3){animation-delay:.3s;}
+  @keyframes dotBounce{
+    0%,60%,100%{opacity:.25; transform:translateY(0);}
+    30%{opacity:1; transform:translateY(-3px);}
+  }
+
+  .loader-progress{
+    display:flex; align-items:center; gap:14px;
+  }
+  .loader-bar{
+    width:180px; height:6px; border-radius:100px;
+    background:var(--border); overflow:hidden;
+  }
+  .loader-fill{
+    width:0%; height:100%; border-radius:100px;
+    background:linear-gradient(90deg, var(--primary), #8C97FF);
+    transition:width .12s linear;
+  }
+  .loader-percent{
+    font-size:13px; font-weight:700; color:var(--primary);
+    min-width:36px; text-align:left;
+    font-variant-numeric:tabular-nums;
+  }
+
+  @media (max-width:600px){
+    .mock-frame{ width:88vw; max-width:270px; margin-bottom:24px; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .mock-frame, .mock-dot, .mock-url, .mock-cursor, .mock-badge, .loader-name{
+      animation:none !important; opacity:1 !important; transform:none !important;
+    }
+    .skeleton{ animation:none !important; }
+    .mock-cursor{ display:none !important; }
+    #preloader, .preloader-inner{ transition:opacity .3s ease !important; }
+  }
 
   /* ==============================================================
      RESPONSIVE
