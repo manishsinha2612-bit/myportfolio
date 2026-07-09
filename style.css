@@ -284,7 +284,9 @@
   /* ================= SKILLS ================= */
   .skills-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
+    justify-content: center;
+    align-items: center;
+    grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
     gap:var(--grid-gap);
   }
   .skill-card{
