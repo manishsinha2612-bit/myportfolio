@@ -153,27 +153,32 @@ document.querySelectorAll('.btn').forEach(btn => {
   });
 });
 
-// Resume button downloads the CV directly
-document.getElementById('resumeBtn').addEventListener('click', () => {
-  window.location.href = '../UI_UX Design_Resume_Updated.pdf';
-});
-
-// Contact form submit — POST to FormSubmit AJAX endpoint
+// Resume link is now a real <a download> element — no JS needed to trigger it.
+// Contact form submit — POST to Web3Forms (no activation step required)
 document.getElementById('contactForm').addEventListener('submit', function (e) {
   e.preventDefault();
   const form = this;
-  const data = new FormData(form);
-  fetch('https://formsubmit.co/ajax/manishsinha2612@gmail.com', {
+  const formData = new FormData(form);
+  const payload = Object.fromEntries(formData);
+  const json = JSON.stringify(payload);
+
+  fetch('https://api.web3forms.com/submit', {
     method: 'POST',
-    headers: { 'Accept': 'application/json' },
-    body: data
-  }).then(response => response.json())
-  .then(json => {
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    },
+    body: json
+  }).then(async (response) => {
+    const result = await response.json().catch(() => ({}));
+    if (!response.ok || result.success === false) {
+      throw new Error(result.message || `HTTP ${response.status}`);
+    }
     form.style.display = 'none';
     document.getElementById('formSuccess').classList.add('show');
     form.reset();
   }).catch(err => {
-    alert('There was an error submitting the form. Please try again later.');
-    console.error(err);
+    console.error('Contact form submission failed:', err.message || err);
+    alert('Form submission failed. Reason: ' + (err.message || 'unknown error') + '\n\nPlease send a screenshot of this exact message.');
   });
 });
