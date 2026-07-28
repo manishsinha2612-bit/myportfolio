@@ -289,7 +289,7 @@
   /* ================= SKILLS ================= */
   .skills-grid{
     display:grid;
-    justify-content: center; align-items: center;
+    /* justify-content: center; align-items: center; */
     grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
     gap:var(--grid-gap);
   }
