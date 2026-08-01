@@ -160,7 +160,12 @@ document.getElementById('resumeBtn').addEventListener('click', () => {
   const resumePath = isLocalServer
     ? '/portfolio/public/assets/UI_UX_Resume_Manish_Kumar_Sinha.pdf'
     : '/assets/UI_UX_Resume_Manish_Kumar_Sinha.pdf';
-  window.location.assign(resumePath);
+  const downloadLink = document.createElement('a');
+  downloadLink.href = resumePath;
+  downloadLink.download = 'UI_UX_Resume_Manish_Kumar_Sinha.pdf';
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  downloadLink.remove();
 });
 
 // Contact form submit — POST to FormSubmit AJAX endpoint
