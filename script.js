@@ -159,7 +159,7 @@ document.getElementById('resumeBtn').addEventListener('click', () => {
     || window.location.hostname === '127.0.0.1';
   const resumePath = isLocalServer
     ? '/portfolio/public/assets/UI_UX_Resume_Manish_Kumar_Sinha.pdf'
-    : '/assets/UI_UX_Resume_Manish_Kumar_Sinha.pdf';
+    : '/public/assets/UI_UX_Resume_Manish_Kumar_Sinha.pdf';
   const downloadLink = document.createElement('a');
   downloadLink.href = resumePath;
   downloadLink.download = 'UI_UX_Resume_Manish_Kumar_Sinha.pdf';
