@@ -414,6 +414,7 @@
     outline:none; border-color:var(--primary); box-shadow:0 0 0 4px rgba(91,108,255,.10);
   }
   .field textarea{resize:vertical; min-height:120px;}
+  .honey-field{position:absolute; left:-9999px; width:1px; height:1px; opacity:0; pointer-events:none;}
   .btn-send{width:100%; justify-content:center;}
   .form-success{
     display:none; text-align:center; padding:40px 20px;

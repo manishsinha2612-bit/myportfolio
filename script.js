@@ -155,25 +155,39 @@ document.querySelectorAll('.btn').forEach(btn => {
 
 // Resume button downloads the CV directly
 document.getElementById('resumeBtn').addEventListener('click', () => {
-  window.location.href = '../UI_UX_Resume_Manish_Kumar_Sinha.pdf';
+  const resumePath = window.location.pathname.includes('/portfolio/')
+    ? '/portfolio/public/assets/UI_UX_Resume_Manish_Kumar_Sinha.pdf'
+    : '/assets/UI_UX_Resume_Manish_Kumar_Sinha.pdf';
+  window.location.href = resumePath;
 });
 
 // Contact form submit — POST to FormSubmit AJAX endpoint
 document.getElementById('contactForm').addEventListener('submit', function (e) {
   e.preventDefault();
   const form = this;
+  const submitButton = form.querySelector('button[type="submit"]');
   const data = new FormData(form);
+  data.set('_replyto', data.get('email'));
+  submitButton.disabled = true;
+  submitButton.textContent = 'Sending...';
   fetch('https://formsubmit.co/ajax/manishsinha2612@gmail.com', {
     method: 'POST',
     headers: { 'Accept': 'application/json' },
     body: data
-  }).then(response => response.json())
-  .then(json => {
+  }).then(async response => {
+    const json = await response.json();
+    if (!response.ok || (json.success !== 'true' && json.success !== true)) {
+      throw new Error(json.message || 'Form submission failed');
+    }
+    return json;
+  }).then(() => {
     form.style.display = 'none';
     document.getElementById('formSuccess').classList.add('show');
     form.reset();
   }).catch(err => {
-    alert('There was an error submitting the form. Please try again later.');
+    submitButton.disabled = false;
+    submitButton.textContent = 'Send Message';
+    alert(err.message || 'There was an error submitting the form. Please try again later.');
     console.error(err);
   });
 });

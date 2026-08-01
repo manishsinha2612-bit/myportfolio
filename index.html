@@ -541,10 +541,7 @@ Through academic and personal projects, I've built a strong foundation in user r
           <a href="#" class="social-icon" aria-label="Behance">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h6a3 3 0 0 1 0 6H3z"/><path d="M3 14h7a3 3 0 0 1 0 6H3z"/><path d="M15 13a4 4 0 1 1 8 .5 M15 13h8 M17 9h4"/></svg>
           </a>
-          <a href="#" class="social-icon" aria-label="GitHub">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9c0-1.1.4-2 1-2.6-3.5-.4-7-1.7-7-7.7 0-1.5.5-2.8 1.4-3.8-.1-.4-.6-2 .1-4 0 0 1.2-.4 4 1.5a13.6 13.6 0 0 1 7.3 0c2.7-1.9 4-1.5 4-1.5.7 2 .2 3.6.1 4 .9 1 1.4 2.3 1.4 3.8 0 6-3.6 7.3-7 7.7.5.5 1 1.5 1 3V22"/></svg>
-          </a>
-          <a href="mailto:manishsinha2612@gmail.com" class="social-icon" aria-label="Email">
+          <a href="mailto:example@email.com" class="social-icon" aria-label="Email">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></svg>
           </a>
         </div>
@@ -552,9 +549,13 @@ Through academic and personal projects, I've built a strong foundation in user r
 
       <div class="contact-form reveal">
         <form id="contactForm">
+          <input type="hidden" name="_subject" value="New portfolio contact message">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="honey-field" aria-hidden="true">
           <div class="form-row">
             <div class="field"><label for="name">Name</label><input type="text" id="name" name="name" required placeholder="Your name"></div>
-            <div class="field"><label for="email">Email</label><input type="email" id="email" name="email" required placeholder="manishsinha2612@gmail.com"></div>
+            <div class="field"><label for="email">Email</label><input type="email" id="email" name="email" required placeholder="you@example.com"></div>
           </div>
           <div class="field"><label for="phone">Phone</label><input type="tel" id="phone" name="phone" placeholder="+91 00000 00000"></div>
           <div class="field"><label for="message">Message</label><textarea id="message" name="message" required placeholder="Tell me about the opportunity or project..."></textarea></div>
