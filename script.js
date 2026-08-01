@@ -155,10 +155,12 @@ document.querySelectorAll('.btn').forEach(btn => {
 
 // Resume button downloads the CV directly
 document.getElementById('resumeBtn').addEventListener('click', () => {
-  const resumePath = window.location.pathname.includes('/portfolio/')
+  const isLocalServer = window.location.hostname === 'localhost'
+    || window.location.hostname === '127.0.0.1';
+  const resumePath = isLocalServer
     ? '/portfolio/public/assets/UI_UX_Resume_Manish_Kumar_Sinha.pdf'
     : '/assets/UI_UX_Resume_Manish_Kumar_Sinha.pdf';
-  window.location.href = resumePath;
+  window.location.assign(resumePath);
 });
 
 // Contact form submit — POST to FormSubmit AJAX endpoint
