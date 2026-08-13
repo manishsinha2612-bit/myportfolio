@@ -198,3 +198,32 @@ document.getElementById('contactForm').addEventListener('submit', function (e) {
     console.error(err);
   });
 });
+
+// Case study dropdown toggle for Inkriti project
+(function () {
+  const toggleBtn = document.getElementById('inkriti-case-study-btn');
+  const dropdown = document.getElementById('inkriti-dropdown');
+  if (!toggleBtn || !dropdown) return;
+
+  // Toggle dropdown visibility
+  toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    dropdown.classList.toggle('show');
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!dropdown.classList.contains('show')) return;
+    if (!dropdown.contains(e.target) && e.target !== toggleBtn) {
+      dropdown.classList.remove('show');
+    }
+  });
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && dropdown.classList.contains('show')) {
+      dropdown.classList.remove('show');
+      toggleBtn.focus();
+    }
+  });
+})();
