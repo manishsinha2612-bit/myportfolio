@@ -86,8 +86,27 @@ window.addEventListener('scroll', () => {
 // Mobile menu toggle
 const menuToggle = document.getElementById('menuToggle');
 const navLinks = document.getElementById('navLinks');
-menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
-navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+let mobileMenuOpen = false;
+
+const setMenuState = (isOpen) => {
+  mobileMenuOpen = isOpen;
+  navLinks.classList.toggle('open', isOpen);
+  menuToggle.classList.toggle('is-open', isOpen);
+  menuToggle.setAttribute('aria-expanded', String(isOpen));
+  menuToggle.setAttribute('aria-label', isOpen ? 'Close menu' : 'Toggle menu');
+};
+
+menuToggle.addEventListener('click', () => {
+  setMenuState(!mobileMenuOpen);
+});
+
+navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenuState(false)));
+
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 900) {
+    setMenuState(false);
+  }
+});
 
 // Scroll spy for active nav link
 const sections = document.querySelectorAll('section[id]');
