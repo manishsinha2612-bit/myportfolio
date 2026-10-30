@@ -659,6 +659,7 @@
   @media (max-width:900px){
     :root{ --section-pad:88px; --col-gap:40px; }
 
+    .hero{ min-height:auto; align-items:flex-start; padding-top:96px; }
     .hero .container{ grid-template-columns:1fr; text-align:center; }
     .hero-greet{ justify-content:center; }
     .hero-greet::before{ display:none; }
